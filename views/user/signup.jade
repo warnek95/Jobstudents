@@ -1,0 +1,14 @@
+extends ../layout
+block content
+  h1 Signup form
+  form(method='post' name='signup' autocomplete='Off')
+    input(type='text', placeholder='Nom', name='lastName')
+    br
+    input(type='text', placeholder='Prenom', name='firstName')
+    br
+    input(type='password', placeholder='Mot de passe', name='password')
+    br
+    input(type='submit', placeholder='Valider')
+
+
+  =csrfToken
