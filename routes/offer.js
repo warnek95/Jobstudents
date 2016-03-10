@@ -11,6 +11,6 @@ router.get('/new',csrfProtection, function(req, res, next) {
   res.render('offer/new', { csrfToken: req.csrfToken() });
 });
 router.post('/new', parseForm, csrfProtection,OfferController.new, function(req, res, next) {
-  res.redirect('/offer/show?id='+id);
+  res.redirect('/');
 });
 module.exports = router;
