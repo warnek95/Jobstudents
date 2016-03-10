@@ -8,7 +8,10 @@ block content
     br
     input(type='password', placeholder='Mot de passe', name='password')
     br
+    input(type='hidden', name='_csrf', value='{{csrfToken}}')
     input(type='submit', placeholder='Valider')
+
+
 
 
   =csrfToken
