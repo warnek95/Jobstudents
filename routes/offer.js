@@ -8,7 +8,8 @@ var csrfProtection = csrf({ cookie: true })
 var parseForm = bodyParser.urlencoded({ extended: false })
 
 router.get('/new',csrfProtection, function(req, res, next) {
-  res.render('offer/new', { csrfToken: req.csrfToken() });
+  res.locals.csrfToken = req.csrfToken();
+  res.render('offer/new');
 });
 router.post('/new', parseForm, csrfProtection,OfferController.new, function(req, res, next) {
   res.redirect('/');

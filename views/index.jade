@@ -87,11 +87,19 @@ html(lang='fr')
               a.page-scroll(href='#contact') Contact
             li
               a.page-scroll(href='#') Recruteur ?
-          ul.nav.navbar-nav.navbar-right
-            button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal1')
-              | connexion
-            button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
-              | inscription
+          unless session.authenticated
+            ul.nav.navbar-nav.navbar-right
+              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal1')
+                | connexion
+              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
+                | inscription
+          else
+            ul.nav.navbar-nav.navbar-right
+              //- button.btn.btn-default.btn-lg(type='button')
+              //-   | déconnexion
+              a(href='/signout') déconnexion
+      
+            
         // /.navbar-collapse
       // /.container
     // Intro Section
@@ -239,27 +247,39 @@ html(lang='fr')
                 span(aria-hidden='true') ×
               h4#myModalLabel.modal-title Inscription
             .modal-body
-              .input-group
-                span.input-group-addon Pseudo
-                input#pseudo.form-control(type='text', name='pseudo', placeholder='Votre pseudo')
-              br
-              .input-group
-                span.input-group-addon Email
-                input#email.form-control(type='email', name='email', placeholder='Votre email')
-              br
-              .input-group
-                span.input-group-addon Confirmation du mail
-                input#email2.form-control(type='email', name='email2', placeholder='Votre confirmation')
-              br
-              .input-group
-                span.input-group-addon Mot de passe
-                input#mdp.form-control(type='text', name='motdepasse', placeholder='Votre mot de passe')
-              br
-              .input-group
-                span.input-group-addon Confirmation du mot de passe 
-                input#mdp2.form-control(type='text', name='motdepasse2', placeholder='Confirmation')
-              br
-              button.btn.btn-primary(type='button', data-dismiss='modal') Inscription
+              form(method='post' name='signup' autocomplete='Off' action='/user/signup')
+                .input-group
+                  span.input-group-addon Nom
+                  input#pseudo.form-control(type='text', name='lastName', placeholder='Votre nom')
+                br
+                .input-group
+                  span.input-group-addon Prénom
+                  input#pseudo.form-control(type='text', name='firstName', placeholder='Votre prénom')
+                br
+                .input-group
+                  span.input-group-addon Email
+                  input#email.form-control(type='email', name='email', placeholder='Votre email')
+                br
+                .input-group
+                  span.input-group-addon Confirmation du mail
+                  input#email2.form-control(type='email', name='email2', placeholder='Votre confirmation')
+                br
+                .input-group
+                  span.input-group-addon Mot de passe
+                  input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
+                br
+                .input-group
+                  span.input-group-addon Confirmation du mot de passe 
+                  input#mdp2.form-control(type='password', name='password2', placeholder='Confirmation')
+                br
+                .input-group
+                  span.input-group-addon Role
+                  select.form-control(name='status')
+                    option(value='applicant') Postulant
+                    option(value='recruiter') Recruteur
+                br
+                input(type='hidden', name='_csrf', value=csrfToken)
+                button.btn.btn-primary(type='submit') Inscription
       // Modal
       #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
         .modal-dialog(role='document')
@@ -269,15 +289,17 @@ html(lang='fr')
                 span(aria-hidden='true') ×
               h4#myModalLabel.modal-title Connexion
             .modal-body
-              .input-group
-                span.input-group-addon Pseudo
-                input#pseudo.form-control(type='text', name='identifiant', placeholder='Votre pseudo')
-              br
-              .input-group
-                span.input-group-addon Mot de passe 
-                input#mdp.form-control(type='password', name='motdepasse', placeholder='Votre mot de passe')
-              br
-              button.btn.btn-primary(type='button', data-dismiss='modal') Connexion
+              form(method='post' name='signin' autocomplete='Off' action='/signin')
+                .input-group
+                  span.input-group-addon Email
+                  input#pseudo.form-control(type='text', name='email', placeholder='Votre email')
+                br
+                .input-group
+                  span.input-group-addon Mot de passe 
+                  input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
+                br
+                input(type='hidden', name='_csrf', value=csrfToken)
+                button.btn.btn-primary(type='submit') Connexion
       br
       br
       // Contact Section

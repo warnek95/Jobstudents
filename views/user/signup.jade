@@ -6,11 +6,9 @@ block content
     br
     input(type='text', placeholder='Prenom', name='firstName')
     br
+    input(type='text', placeholder='Email', name='email')
+    br
     input(type='password', placeholder='Mot de passe', name='password')
     br
-    input(type='hidden', name='_csrf', value='{{csrfToken}}')
-    input(type='submit', placeholder='Valider')
     input(type='hidden', name='_csrf', value=csrfToken)
-
-
-  //- =csrfToken
+    input(type='submit', placeholder='Valider')
