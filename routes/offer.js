@@ -13,4 +13,7 @@ router.get('/new',csrfProtection, function(req, res, next) {
 router.post('/new', parseForm, csrfProtection,OfferController.new, function(req, res, next) {
 
 });
+router.get('/search/:q', OfferController.find, function(req, res, next) {
+
+});
 module.exports = router;

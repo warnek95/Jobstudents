@@ -1,4 +1,4 @@
-var Offer = require('../models/Offer.js');
+var Offer = require('../models/OfferSchema.js');
 
 module.exports = {
   new : function(req,res,next){
@@ -11,14 +11,18 @@ module.exports = {
     res.render('offer/new');
   },
   find : function(req,res,next) {
-    Offer.findOne(function(err, user){
+    Offer.findOne({title:new RegExp(req.params.q,'i')},function(err, offer){
       console.log(offer);
-      if(offer) return console.log(err);
+      if(err) return console.log(err);
       if(offer){
         next(offer);
+        res.locals.offer = offer;
+        res.render('search')
       }else {
-        res.redirect('/')
+        res.locals.offer = offer;
+        res.render('search')
       }
     });
+    console.log(req.params.q);
   }
 };
