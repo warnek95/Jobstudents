@@ -202,6 +202,10 @@ html(lang='fr')
                   //-   br
                   //-   | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor autem similique sequi, ipsa quasi in nesciunt nobis vero sint nemo qui molestiae et pariatur quisquam inventore fuga, repellendus laudantium ad!
         .row
+          if session.err
+            span 
+              =session.err.errEmail
+          
           // class="img-responsive" et centrer en meme temps
           //- img.img-responsive.logotaille(src='/images/logo.jpg', alt='logo', title='Job for student logo')
         br
@@ -214,7 +218,8 @@ html(lang='fr')
             .input-group
               input.form-control(type='text', placeholder='Votre Recherche ...')
               span.input-group-btn
-                button.btn.btn-default(type='button') Rechercher!
+                button.btn.btn-default(type='button') Rechercher! 
+                =session
             // /input-group
           // /.col-md-12
         // /.row
@@ -262,7 +267,7 @@ html(lang='fr')
                 br
                 .input-group
                   span.input-group-addon Confirmation du mail
-                  input#email2.form-control(type='email', name='email2', placeholder='Votre confirmation')
+                  input#email2.form-control(type='email', name='emailConfirmation', placeholder='Votre confirmation')
                 br
                 .input-group
                   span.input-group-addon Mot de passe
@@ -270,7 +275,7 @@ html(lang='fr')
                 br
                 .input-group
                   span.input-group-addon Confirmation du mot de passe 
-                  input#mdp2.form-control(type='password', name='password2', placeholder='Confirmation')
+                  input#mdp2.form-control(type='password', name='passwordConfirmation', placeholder='Confirmation')
                 br
                 .input-group
                   span.input-group-addon Role
@@ -337,6 +342,10 @@ html(lang='fr')
                 img.taille.img-responsive(src='/images/social/Pinterest.png', alt='pinterest')
           p.tdr
             | © 2016 Tous droits réservés
+      script(type='text/javascript').
+      $(window).load(function(){
+      $('#myModal').modal('show');
+      });      
       // jQuery
       script(src='/javascripts/jquery-1.12.1.js')
       // Bootstrap Core JavaScript

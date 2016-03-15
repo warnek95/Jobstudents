@@ -3,23 +3,32 @@ var User = require('../models/User.js');
 module.exports = {
   signup : function(req,res,next){
     // console.log(req.session)
-    verification(req.body,function () {
-      encrypt(req.body.password, function (password) {
-        req.body.password = password;
-        create(req.body,function (err,user) {
-          if (err) {
-            console.log(err.toString());
-            res.redirect('/');
-          }
-          else {
-            req.session.User = user;
-            req.session.authenticated = true;
-            res.locals.session = req.session;
-            res.locals.csrfToken = req.csrfToken();
-            res.redirect('/');
-          }
+    verification(req.body,function (err) {
+      console.log(err);
+      if (err.errEmail || err.errPassword) {
+        req.session.err = err;
+        res.redirect('/');
+      } else {
+        encrypt(req.body.password, function (password) {
+          req.body.password = password;
+          create(req.body,function (err,user) {
+            if (err) {
+              console.log(err.toString());
+              req.session.err = {
+                errEmail : err.toString()
+              };
+              res.redirect('/');
+            }
+            else {
+              req.session.User = user;
+              req.session.authenticated = true;
+              res.locals.session = req.session;
+              res.locals.csrfToken = req.csrfToken();
+              res.redirect('/');
+            }
+          })
         })
-      })
+      }
     })
   },
   resSignup : function(req,res,next) {
@@ -53,6 +62,13 @@ function encrypt(password,next) {
     },
 
   });
+}
+
+function verification(user,next){
+  var err = {};
+  err.errEmail = ( user.email != user.emailConfirmation ) ? "email" : false
+  err.errPassword = ( user.password != user.passwordConfirmation ) ? "password" : false
+  next(err);
 }
 
 function create(user,next){
