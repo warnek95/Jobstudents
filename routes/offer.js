@@ -7,7 +7,7 @@ var csrf = require('csurf')
 var csrfProtection = csrf({ cookie: true })
 var parseForm = bodyParser.urlencoded({ extended: false })
 
-router.get('/new',csrfProtection, function(req, res, next) {
+router.get('/new',csrfProtection,OfferController.resNew, function(req, res, next) {
 
 });
 router.post('/new', parseForm, csrfProtection,OfferController.new, function(req, res, next) {

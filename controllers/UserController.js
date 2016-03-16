@@ -38,6 +38,7 @@ module.exports = {
   },
   resSignup : function(req,res,next) {
     res.locals.csrfToken = req.csrfToken();
+    res.locals.session = req.session;
     res.render('user/signup');
   },
   show : function (req,res,next) {
