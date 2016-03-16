@@ -1,13 +1,181 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+head
+  meta(charset='utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  meta(name='description', content='')
+  // mettre une description
+  meta(name='author', content='Job for student')
+  title Job for Students
+  link(rel='icon', type='image/x-icon', href='images/dbzbal.ico')
+  link(href='/stylesheets/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+  link(href='/stylesheets/scrolling-nav.css', rel='stylesheet')
+  link(href='/stylesheets/style2.css', rel='stylesheet')
+  link(href='/stylesheets/bootstrap/css/footer-distributed-with-address-and-phones.css', rel='stylesheet')
+  // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+  // WARNING: Respond.js doesn't work if you view the page via file://
+  //if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
   body
-    //- a(href='/')  /
-    //- a(href='/user/signup')  signup
-    //- a(href='/headhunter')  headhunter
-    //- a(href='/offer/new')  new offer
-    //- a(href='/search')  search
-    //- a(href='/test/new')  new test
+    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header.page-scroll
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.page-scroll(href='/') Job for student
+        .collapse.navbar-collapse.navbar-ex1-collapse
+          ul.nav.navbar-nav
+            // Hidden li included to remove active class from about link when scrolled up past about section
+            li.hidden
+              a.page-scroll(href='#page-top')
+            li
+              a.page-scroll(href='#about') Qui sommes nous ?
+            //- li
+            //-   a.page-scroll(href='#services') Services
+            li
+              a.page-scroll(href='#contact') Contact
+            li
+              a.page-scroll(href='#') Recruteur ?
+          unless session.authenticated
+            ul.nav.navbar-nav.navbar-right
+              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal1')
+                | connexion
+              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
+                | inscription
+          else
+            ul.nav.navbar-nav.navbar-right
+              //- button.btn.btn-default.btn-lg(type='button')
+              //-   | déconnexion
+              a(href='/signout') déconnexion
+              
+              
     block content
+    
+    // Modal
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header.modal-header-primary
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title Inscription
+          .modal-body
+            form(method='post' name='signup' autocomplete='Off' action='/user/signup')
+              .input-group
+                span.input-group-addon Nom
+                input#pseudo.form-control(type='text', name='lastName', placeholder='Votre nom',value=lastName)
+              br
+              .input-group
+                span.input-group-addon Prénom
+                input#pseudo.form-control(type='text', name='firstName', placeholder='Votre prénom',value=firstName)
+              br
+              .input-group
+                span.input-group-addon Email
+                input#email.form-control(type='email', name='email', placeholder='Votre email')
+              br
+              .input-group
+                span.input-group-addon Confirmation du mail
+                input#email2.form-control(type='email', name='emailConfirmation', placeholder='Votre confirmation')
+              br
+              .input-group
+                span.input-group-addon Mot de passe
+                input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
+              br
+              .input-group
+                span.input-group-addon Confirmation du mot de passe 
+                input#mdp2.form-control(type='password', name='passwordConfirmation', placeholder='Confirmation')
+              br
+              .input-group
+                span.input-group-addon Role
+                select.form-control(name='status')
+                  option(value='applicant') Postulant
+                  option(value='recruiter') Recruteur
+              br
+              input(type='hidden', name='_csrf', value=csrfToken)
+              button.btn.btn-primary(type='submit') Inscription
+    
+    // Modal
+    #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header.modal-header-primary
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+            h4#myModalLabel.modal-title Connexion
+          .modal-body
+            form(method='post' name='signin' autocomplete='Off' action='/signin')
+              .input-group
+                span.input-group-addon Email
+                input#pseudo.form-control(type='text', name='email', placeholder='Votre email')
+              br
+              .input-group
+                span.input-group-addon Mot de passe 
+                input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
+              br
+              input(type='hidden', name='_csrf', value=csrfToken)
+              button.btn.btn-primary(type='submit') Connexion
+              
+              
+    // jQuery
+    script(src='/javascripts/jquery-1.12.1.js')
+    // Bootstrap Core JavaScript
+    script(src='/stylesheets/bootstrap/js/bootstrap.min.js')
+    // Scrolling Nav JavaScript
+    script(src='/javascripts/jquery.easing.min.js')
+    script(src='/javascripts/scrolling-nav.js')
+    
+    footer#contact.footer-distributed
+      .footer-left
+        h3.fontalltext Job4Student
+        p.footer-links Des diplomes, aucune experience? ici un job vous attends !
+        p.footer-company-name.fontalltext Job4Student © 2015
+      .footer-center
+        div
+          i.fa.fa-map-marker
+          p.fontalltext
+            span 41 boulevard Montmartre 
+            | 75002 Paris, France
+        div
+          i.fa.fa-phone
+          p.fontalltext  01 64 21 41 40
+        div
+          i.fa.fa-envelope
+          p.fontalltext
+            a(href='mailto:contact@jobforstudent.com') contact@jobforstudent.com
+      .footer-right
+        p.footer-company-about.fontalltext
+          span A propos
+          |                         Jobforstudent est entièrement dédié à la recherche de stages, contrats d'alternance ou d'un premier emploi.
+      .container.socialfooterico
+        p.tdr.fontalltext Rejoignez-nous sur
+        .row
+          .col-md-offset-2.col-md-1
+            a(href='https://www.facebook.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/facebook.png', alt='Facebook')
+          .col-md-1
+            a(href='https://www.twitter.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/twitter.png', alt='twitter')
+          .col-md-1
+            a(href='https://fr.linkedin.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/linkedin1.png', alt='linkedin')
+          .col-md-1
+            a(href='https://www.viado.com', target='_blank')
+              img.taille.img-responsive(src='/images/social/Viadeo.png', alt='viodea')
+          .col-md-1
+            a(href='https://www.googleplus.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/google-plus.png', alt='Google plus')
+          .col-md-1
+            a(href='https://www.youtube.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/Youtube.png', alt='youtube')
+          .col-md-1
+            a(href='https://www.instagram.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/skype.png', alt='instagram')
+          .col-md-1
+            a(href='https://www.pinterest.com/', target='_blank')
+              img.taille.img-responsive(src='/images/social/Pinterest.png', alt='pinterest')
+        p.tdr.fontalltext © 2016 Tous droits réservés

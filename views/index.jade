@@ -1,194 +1,11 @@
-//- extends layout
-//- 
-//- block content
-//-   h1= title
-//-   p Welcome to #{title}
-doctype html
-html(lang='fr')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='')
-    // mettre une description
-    meta(name='author', content='Job for student')
-    title Job for Students
-    link(rel='icon', type='image/x-icon', href='images/dbzbal.ico')
-    link(href='/stylesheets/bootstrap/css/bootstrap.min.css', rel='stylesheet')
-    link(href='/stylesheets/scrolling-nav.css', rel='stylesheet')
-    link(href='/stylesheets/style2.css', rel='stylesheet')
-    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-    // WARNING: Respond.js doesn't work if you view the page via file://
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
-      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
-  body#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
-    // Navigation
-    //
-      <nav class="navbar navbar-fixed-top" role="navigation">
-      <div class="container">
-      <div class="navbar-header page-scroll">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand page-scroll white" href="#page-top">Job for student</a>
-      </div>
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-      <li class="hidden">
-      <a class="page-scroll" href="#page-top"></a>
-      </li>
-      <li>
-      <a class="page-scroll white" href="#about">Qui sommes nous ?</a>
-      </li>
-      //- <li>
-      //- <a class="page-scroll white" href="#services">Services</a>
-      //- </li>
-      <li>
-      <a class="page-scroll white" href="#contact">Contact</a>
-      </li>
-      <li>
-      <a class="page-scroll white" href="/pages/recruteur.html">Vous êtes recruteur ?</a>
-      </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      <button type="button" class="btn btn-link btn-md white" data-toggle="modal" data-target="#myModal1">
-      connexion
-      </button>
-      <button type="button" class="btn btn-link btn-sm white" data-toggle="modal" data-target="#myModal">
-      inscription
-      </button>
-      </ul>
-      </div>
-      </div>
-      </nav>
-    nav.navbar.navbar-default.navbar-fixed-top(role='navigation')
-      .container
-        .navbar-header.page-scroll
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand.page-scroll(href='#page-top') Job for student
-        .collapse.navbar-collapse.navbar-ex1-collapse
-          ul.nav.navbar-nav
-            // Hidden li included to remove active class from about link when scrolled up past about section
-            li.hidden
-              a.page-scroll(href='#page-top')
-            li
-              a.page-scroll(href='#about') Qui sommes nous ?
-            //- li
-            //-   a.page-scroll(href='#services') Services
-            li
-              a.page-scroll(href='#contact') Contact
-            li
-              a.page-scroll(href='#') Recruteur ?
-          unless session.authenticated
-            ul.nav.navbar-nav.navbar-right
-              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal1')
-                | connexion
-              button.btn.btn-default.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
-                | inscription
-          else
-            ul.nav.navbar-nav.navbar-right
-              //- button.btn.btn-default.btn-lg(type='button')
-              //-   | déconnexion
-              a(href='/signout') déconnexion
-      
-            
-        // /.navbar-collapse
-      // /.container
-    // Intro Section
+extends layout
+
+block content
     #intro.intro-section
-      #myCarousel.carousel.slide(data-ride='carousel')
-        // Indicators
-        ol.carousel-indicators
-          li.active(data-target='#myCarousel', data-slide-to='0')
-          li(data-target='#myCarousel', data-slide-to='1')
-          li(data-target='#myCarousel', data-slide-to='2')
-        .carousel-inner(role='listbox')
-          .item.active
-            img#carrouselimg.first-slide.img-responsive(src='/images/char.jpg', alt='First slide')
-          .item
-            img#carrouselimg.second-slide.img-responsive(src='/images/char.jpg', alt='Second slide')
-          .item
-            img#carrouselimg.third-slide.img-responsive(src='/images/char.jpg', alt='Third slide')
-        a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
-          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
-          span.sr-only Previous
-        a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
-          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
-          span.sr-only Next
-      // /.carousel
-      //
-        <div class="search">
-        <div class="container">
-        <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-        <div class="form-section">
-        <div class="row">
-        <form role="form">
-        <div class="col-md-4">
-        <div class="form-group">
-        <label class="sr-only" for="location">Location</label>
-        <input type="email" class="form-control" id="location" placeholder="Where ?">
-        </div>
-        </div>
-        <div class="col-md-2">
-        <div class="form-group">
-        <label class="sr-only" for="checkin">Check in</label>
-        <div class="input-group">
-        <input type="text" class="form-control" id="checkin" placeholder="Check in">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-2">
-        <div class="form-group">
-        <label class="sr-only" for="checkout">Check out</label>
-        <div class="input-group">
-        <input type="text" class="form-control" id="checkout" placeholder="Check out">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-2">
-        <div class="form-group">
-        <label class="sr-only" for="guest">Guest</label>
-        <select id="guest" name="guest" class="form-control">
-        <option value="1">1 Guest</option>
-        <option value="2">2 Guests</option>
-        <option value="3">3 Guests</option>
-        <option value="4">4 Guests</option>
-        <option value="5">5 Guests</option>
-        <option value="6">6 Guests</option>
-        <option value="7">7 Guests</option>
-        <option value="8">8 Guests</option>
-        <option value="9">9 Guests</option>
-        <option value="10">10 Guests</option>
-        <option value="11">11 Guests</option>
-        <option value="12">12 Guests</option>
-        <option value="13">13 Guests</option>
-        <option value="14">14 Guests</option>
-        <option value="15">15 Guests</option>
-        <option value="16">16+ Guests</option>
-        </select>
-        </div>
-        </div>
-        <div class="col-md-2">
-        <button type="submit" class="btn btn-default btn-primary">Search</button>
-        </div>
-        </form>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+      img.imageaccl.img-responsive(src="/images/job4students.jpg", alt="")
+      br
+      p.fonttextej4s.animated.pulse Job4Student
+  
       .container
         #about.container.about-section
           .row
@@ -202,9 +19,6 @@ html(lang='fr')
                   //-   br
                   //-   | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor autem similique sequi, ipsa quasi in nesciunt nobis vero sint nemo qui molestiae et pariatur quisquam inventore fuga, repellendus laudantium ad!
         .row
-          if session.err
-            span 
-              =session.err.errEmail
           
           // class="img-responsive" et centrer en meme temps
           //- img.img-responsive.logotaille(src='/images/logo.jpg', alt='logo', title='Job for student logo')
@@ -243,113 +57,52 @@ html(lang='fr')
           .col-xs-6.col-md-4
             a.thumbnail(href='#')
               img(src='/images/602x339%20(15).jpg', alt='...')
-      // Modal
-      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header.modal-header-primary
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') ×
-              h4#myModalLabel.modal-title Inscription
-            .modal-body
-              form(method='post' name='signup' autocomplete='Off' action='/user/signup')
-                .input-group
-                  span.input-group-addon Nom
-                  input#pseudo.form-control(type='text', name='lastName', placeholder='Votre nom')
-                br
-                .input-group
-                  span.input-group-addon Prénom
-                  input#pseudo.form-control(type='text', name='firstName', placeholder='Votre prénom')
-                br
-                .input-group
-                  span.input-group-addon Email
-                  input#email.form-control(type='email', name='email', placeholder='Votre email')
-                br
-                .input-group
-                  span.input-group-addon Confirmation du mail
-                  input#email2.form-control(type='email', name='emailConfirmation', placeholder='Votre confirmation')
-                br
-                .input-group
-                  span.input-group-addon Mot de passe
-                  input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
-                br
-                .input-group
-                  span.input-group-addon Confirmation du mot de passe 
-                  input#mdp2.form-control(type='password', name='passwordConfirmation', placeholder='Confirmation')
-                br
-                .input-group
-                  span.input-group-addon Role
-                  select.form-control(name='status')
-                    option(value='applicant') Postulant
-                    option(value='recruiter') Recruteur
-                br
-                input(type='hidden', name='_csrf', value=csrfToken)
-                button.btn.btn-primary(type='submit') Inscription
-      // Modal
-      #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header.modal-header-primary
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') ×
-              h4#myModalLabel.modal-title Connexion
-            .modal-body
-              form(method='post' name='signin' autocomplete='Off' action='/signin')
-                .input-group
-                  span.input-group-addon Email
-                  input#pseudo.form-control(type='text', name='email', placeholder='Votre email')
-                br
-                .input-group
-                  span.input-group-addon Mot de passe 
-                  input#mdp.form-control(type='password', name='password', placeholder='Votre mot de passe')
-                br
-                input(type='hidden', name='_csrf', value=csrfToken)
-                button.btn.btn-primary(type='submit') Connexion
-      br
-      br
-      // Contact Section
-      footer#contact.footer
-        .container.socialfooterico
-          p.tdr
-            | Rejoignez-nous sur
-          .row
-            .col-md-offset-2.col-md-1
-              a(href='https://www.facebook.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/facebook.png', alt='Facebook')
-            .col-md-1
-              a(href='https://www.twitter.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/twitter.png', alt='twitter')
-            .col-md-1
-              a(href='https://fr.linkedin.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/linkedin1.png', alt='linkedin')
-            .col-md-1
-              a(href='https://www.viado.com', target='_blank')
-                img.taille.img-responsive(src='/images/social/Viadeo.png', alt='viodea')
-            .col-md-1
-              a(href='https://www.googleplus.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/google-plus.png', alt='Google plus')
-            .col-md-1
-              a(href='https://www.skype.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/skype.png', alt='skype')
-            .col-md-1
-              a(href='https://www.youtube.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/Youtube.png', alt='youtube')
-            .col-md-1
-              a(href='https://www.instagram.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/skype.png', alt='instagram')
-            .col-md-1
-              a(href='https://www.pinterest.com/', target='_blank')
-                img.taille.img-responsive(src='/images/social/Pinterest.png', alt='pinterest')
-          p.tdr
-            | © 2016 Tous droits réservés
-      script(type='text/javascript').
-      $(window).load(function(){
-      $('#myModal').modal('show');
-      });      
-      // jQuery
-      script(src='/javascripts/jquery-1.12.1.js')
-      // Bootstrap Core JavaScript
-      script(src='/stylesheets/bootstrap/js/bootstrap.min.js')
-      // Scrolling Nav JavaScript
-      script(src='/javascripts/jquery.easing.min.js')
-      script(src='/javascripts/scrolling-nav.js')
+          .col-xs-6.col-md-4
+            a.thumbnail(href='#')
+              img(src='/images/602x339%20(15).jpg', alt='...')
+          .col-xs-6.col-md-4
+            a.thumbnail(href='#')
+              img(src='/images/602x339%20(15).jpg', alt='...')
+          .col-xs-6.col-md-4
+            a.thumbnail(href='#')
+              img(src='/images/602x339%20(15).jpg', alt='...')
+              
+      a.twitter-timeline(href='https://twitter.com/Giovv_aanni', data-widget-id='697420923536805890', data-chrome='nofooter noborders', width='300', height='600') Tweets de @Giovv_aanni
+          script.
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          br
+          br
+          br
+          br
+          br
+          br
+          a.twitter-follow-button(href='https://twitter.com/Job4Student', data-show-count='false', data-size='large', data-chrome='nofooter noborders', width='300', height='600') Follow @Job4Student
+          script.
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          br
+          
+      if err
+        if err.errEmail || err.errPassword
+          script(src='/javascripts/index.js')
+        else if err.errLogin
+          script(src='/javascripts/index2.js')

@@ -18,7 +18,11 @@ router.get('/signup',csrfProtection, UserController.resSignup, function(req, res
 
 });
 
-router.post('/signup', parseForm, csrfProtection,UserController.signup, function(id,req, res, next) {
+router.post('/signup', parseForm, csrfProtection,UserController.signup, function(req, res, next) {
+
+});
+
+router.get('/show/:id', csrfProtection,UserController.show, function(req, res, next) {
 
 });
 

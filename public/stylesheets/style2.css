@@ -1,22 +1,90 @@
-body{
+@font-face {
+    font-family: GrandHotel;
+    src: url(GrandHotel-Regular.otf);
+}
+
+@font-face {
+    font-family: AmarathRegular;
+    src: url(Amaranth-Regular.otf);
+}
+
+p.fonttextej4s {
+    text-align: center;
+    font-family: GrandHotel;
+    font-size: 50px;
+    animation-duration: 1s;
+    animation-delay: 5s;
+    animation-iteration-count: 1;
+}
+
+.fontalltext {
+    font-family: AmarathRegular;
+}
+
+body {
     background-color: rgb(223,223,223);
     cursor: url('/images/arrow.png'), pointer;
     text-align: center;
 }
 
+.imgtaille {
+    padding-top: 0px;
+    margin: auto;
+    width="60%"
+}
+
+.imageaccl {
+    margin: auto;
+    width: 1900px;
+    height: 500px;
+
+}
+
+/*
+.pargra {
+text-align: center;
+list-style:none;
+font-size: 16px;
+font-style: normal;
+font-family: myFirstFont;
+text-shadow: 1px 1px red;
+}
+*/
+
+/*
+.textabout {
+position: absolute;
+text-align: center;
+list-style:none;
+font-size: 16px;
+font-style: normal;
+font-family: myFirstFont;
+text-shadow: 1px 1px red;
+margin: auto;
+}
+*/
+
+.tdr {
+    text-align: center;
+    font-size: 16px;
+    text-shadow: 1px 1px blue;
+}
+
+
 .navbar {
     margin-bottom: 0;
 }
+
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
     color: white;
     background-color: transparent;
 }
 
-.navbar-default .navbar-nav>li>a{
+.navbar-default .navbar-nav>li>a {
     color: black;
 }
 
-.navbar-default{
+.navbar-default {
     background-color: #333;
     border-color: transparent;
 }
@@ -26,7 +94,8 @@ video {
     height: 400px;
 }
 
-.carousel-inner{
+.carousel-inner {
+    padding-top: 90px;
     padding-left: auto;
     padding-right: auto;
     margin: auto;
@@ -35,32 +104,21 @@ video {
     height: auto;
 }
 
-.logotaille{
+.logotaille {
     margin: auto;
 }
 
-.textabout{
-    position: absolute;
-    text-align: center;
-    list-style:none;
-    font-size: 16px;
-    font-style: normal;
-    font-family: monospace;
-    text-shadow: 1px 1px red;
+#carrouselimg {
     margin: auto;
 }
 
-#carrouselimg{
-    margin: auto;
-}
-
-.taille{
+.taille {
     height:50px;
     width: 50px;
     margin: auto;
 }
 
-.taille:hover{
+.taille:hover {
     -webkit-filter: blur(2px); /* Chrome, Safari, Opera */
     filter: blur(2px);
     cursor: pointer;
@@ -76,17 +134,24 @@ video {
     color: #eee;
 }
 
-.tdr{
-    text-align: center;
-    list-style:none;
-    font-size: 16px;
-    font-style: normal;
-    font-family: monospace;
-    text-shadow: 1px 1px red;
+.logonav {
+    width: 45px;
+    height: 50px;
+    margin-top: -15px;
 }
 
-.white{
-  color: white;
+.footer-distributed{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+textarea {
+    min-height: 210px;
+}
+
+.white {
+    color: white;
 }
 
 .modal-header-success {
@@ -98,11 +163,11 @@ video {
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .modal-header-warning {
-	color:#fff;
+    color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
     background-color: #f0ad4e;
@@ -110,11 +175,11 @@ video {
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .modal-header-danger {
-	color:#fff;
+    color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
     background-color: #d9534f;
@@ -122,8 +187,8 @@ video {
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .modal-header-info {
     color:#fff;
@@ -134,8 +199,8 @@ video {
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .modal-header-primary {
     color:#fff;
@@ -146,6 +211,10 @@ video {
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
-     border-top-left-radius: 5px;
-     border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.carouselMargin {
+  margin-top: 90px;
 }

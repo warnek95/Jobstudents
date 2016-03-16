@@ -2,11 +2,16 @@ var User = require('../models/User.js');
 
 module.exports = {
   signup : function(req,res,next){
+    req.session.err = undefined;
+    req.session.formUser = undefined;
     // console.log(req.session)
     verification(req.body,function (err) {
-      console.log(err);
       if (err.errEmail || err.errPassword) {
         req.session.err = err;
+        req.session.formUser = {
+          firstName : req.body.firstName,
+          lastName : req.body.lastName
+        };
         res.redirect('/');
       } else {
         encrypt(req.body.password, function (password) {
@@ -24,7 +29,7 @@ module.exports = {
               req.session.authenticated = true;
               res.locals.session = req.session;
               res.locals.csrfToken = req.csrfToken();
-              res.redirect('/');
+              res.redirect('/user/show/'+user.id);
             }
           })
         })
@@ -34,6 +39,24 @@ module.exports = {
   resSignup : function(req,res,next) {
     res.locals.csrfToken = req.csrfToken();
     res.render('user/signup');
+  },
+  show : function (req,res,next) {
+    findById(req.params.id,function (err,user) {
+      if (user){
+        res.locals.session = req.session;
+        res.locals.user = user;
+        res.locals.csrfToken = req.csrfToken();
+        res.render('user/show');
+      }else{
+        req.session.err = {
+          errNotFound : "Not found"
+        };
+        res.locals.session = req.session;
+        res.locals.errNotFound = "Not found";
+        res.locals.csrfToken = req.csrfToken();
+        res.render('user/show');
+      }
+    })
   }
 };
 
@@ -86,6 +109,17 @@ function findByEmail(email,res,next){
       next(user);
     }else{
       res.redirect('/')
+    }
+  });
+}
+
+function findById(id,next){
+  User.where({ _id: id }).findOne(function (err, user) {
+    if (err) return console.log(err);
+    if (user) {
+      next(false,user);
+    }else{
+      next(true,user);
     }
   });
 }
