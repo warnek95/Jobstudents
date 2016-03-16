@@ -9,9 +9,9 @@ block content
     h1 Search
     p Hi #{user.firstName} #{user.lastName}
     if session.authenticated
-      if session.User.status == 'applicant' && session.User.id == user.id
+      if session.User.status == 'applicant' && session.User._id == user._id
         p Hi applicant
-      else if session.User.status == 'recruiter' && session.User.id == user.id
+      else if session.User.status == 'recruiter' && session.User._id == user._id
         p Hi recruiter
         
 
