@@ -1,4 +1,18 @@
 extends ../layout
 block content
+    br
+    br
+    br
+    br
+    br
+    br
     h1 Search
-    p Welcome to #{title}
+    p Hi #{user.firstName} #{user.lastName}
+    if session.authenticated
+      if session.User.status == 'applicant' && session.User.id == user.id
+        p Hi applicant
+      else if session.User.status == 'recruiter' && session.User.id == user.id
+        p Hi recruiter
+        
+
+      

@@ -4,6 +4,8 @@ const Schema = mongoose.Schema({
     degree  : String,
     created : { type: Date, default: Date.now},
     company : String,
-    body    : String
+    body    : String,
+    duration : String,
+    contract : String
 }, { collection: 'Offers' });
 module.exports = mongoose.model('Offer', Schema);

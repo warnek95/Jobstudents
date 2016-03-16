@@ -1,3 +1,23 @@
 extends ../layout
 block content
-    h1 New Offer
+    h1 New Offer form
+    form(method='post' name='offer' autocomplete='Off')
+        input(type='text' placeholder='Experience exigee' name='degree')
+        br
+        input(type='text' placeholder="Titre de l'offre" name='title')
+        br
+        input(type='text', placeholder='Duree', name='duration')
+        br
+        input(type='text', placeholder="Nom de l'entreprise", name='company')
+        br
+        select(name='contract', size='1')
+          option(selected='', value='CDI') CDI
+          option(selected='', value='CDD') CDD
+          option(selected='', value='Alternance') Alternance
+          option(selected='', value='Stage') Stage
+        br
+        textarea(rows='30', cols='100' name='body')
+        br
+        input(type='hidden', name='_csrf', value=csrfToken)
+        input(type='submit' text='Envoyer')
+=csrfToken
