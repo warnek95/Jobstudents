@@ -28,8 +28,6 @@ module.exports = {
           success: function (){
             user.id = user._id;
             req.session.User = user;
-            console.log(req.session.User)
-            console.log(user)
             req.session.authenticated = true;
             res.redirect('/');
           }

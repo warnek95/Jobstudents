@@ -1,0 +1,5 @@
+@import "styleptlp.css";
+
+textarea {
+    min-height: 210px;
+}
