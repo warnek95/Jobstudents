@@ -1,108 +1,139 @@
 extends layout
 
 block content
+    // Intro Section
     #intro.intro-section
-      img.imageaccl.img-responsive(src="/images/job4students.jpg", alt="")
+      div
+        p.textimgacc
+          | BIENVENUE AU BUREAU
+        p.textimgacc1
+          | Trouvez le stage ou le job de vos rêves
+        img.imageaccl.img-responsive(src='/images/imageaccueil.jpg')
       br
       p.fonttextej4s.animated.pulse Job4Student
-  
       .container
+        .row
+          .col-md-12
+            .input-group
+              input.form-control(type='text', placeholder='Votre Recherche ...')
+              span.input-group-btn
+                button.btn.btn-default(type='button') Rechercher!
+            // /input-group
+          // /.col-md-12
+        br
+        #services.row
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+          .col-xs-6.col-md-4.imgserv
+            a.thumbnail(href='#')
+              img.img-responsive(src='/images/offreetserviceimg.jpg')
+        br
+        br
+        br
         #about.container.about-section
           .row
             .col-lg-12
               .starter-template
                 // VIDEO ENFIN JE NE SAIS PAS TROP
-                video(src='/video/video%20intro.mp4', controls='')
+                video(src='/video/teaser.webm', controls='')
                 div(col-xs-6='', .col-md-4='')
-                  //- p.textabout
-                  //-   | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga nam quidem accusamus, ullam, aliquam quaerat, aperiam esse aliquid ipsa minima asperiores numquam atque optio corporis blanditiis magnam, deleniti labore repellendus?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias ad magnam esse tenetur facere. Quibusdam id possimus, earum aperiam sunt quaerat, minus dolorum blanditiis sapiente dicta repellendus dignissimos quia facilis.
-                  //-   br
-                  //-   | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor autem similique sequi, ipsa quasi in nesciunt nobis vero sint nemo qui molestiae et pariatur quisquam inventore fuga, repellendus laudantium ad!
-        .row
-          
-          // class="img-responsive" et centrer en meme temps
-          //- img.img-responsive.logotaille(src='/images/logo.jpg', alt='logo', title='Job for student logo')
         br
         br
         br
         br
         br
-        #services.row
-          .col-md-12
-            .input-group
-              input.form-control(type='text', placeholder='Votre Recherche ...')
-              span.input-group-btn
-                button.btn.btn-default(type='button') Rechercher! 
-                =session
-            // /input-group
-          // /.col-md-12
-        // /.row
+      // Modal
+      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header.modal-header-primary
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4#myModalLabel.modal-title Inscription
+            .modal-body
+              .input-group
+                span.input-group-addon Pseudo
+                input#pseudo.form-control(type='text', name='pseudo', placeholder='Votre pseudo')
+              br
+              .input-group
+                span.input-group-addon Email
+                input#email.form-control(type='email', name='email', placeholder='Votre email')
+              br
+              .input-group
+                span.input-group-addon Confirmation du mail
+                input#email2.form-control(type='email', name='email2', placeholder='Votre confirmation')
+              br
+              .input-group
+                span.input-group-addon Mot de passe
+                input#mdp.form-control(type='text', name='motdepasse', placeholder='Votre mot de passe')
+              br
+              .input-group
+                span.input-group-addon Confirmation du mot de passe 
+                input#mdp2.form-control(type='text', name='motdepasse2', placeholder='Confirmation')
+              br
+              p.choixRC Vous êtes ?
+              .btn-group(data-toggle='buttons')
+                label.btn.btn-primary
+                  input#option2(type='radio', name='options', autocomplete='off')
+                  |  Candidat
+                label.btn.btn-primary
+                  input#option3(type='radio', name='options', autocomplete='off')
+                  |  Recruteur
+              br
+              br
+              button.btn.btn-primary(type='button', data-dismiss='modal') Inscription
+      // Modal
+      #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header.modal-header-primary
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4#myModalLabel.modal-title Connexion
+            .modal-body
+              .input-group
+                span.input-group-addon Pseudo
+                input#pseudo.form-control(type='text', name='identifiant', placeholder='Votre pseudo')
+              br
+              .input-group
+                span.input-group-addon Mot de passe 
+                input#mdp.form-control(type='password', name='motdepasse', placeholder='Votre mot de passe')
+              br
+              button.btn.btn-primary(type='button', data-dismiss='modal') Connexion
+      #avistweet
+        a.twitter-timeline(href='https://twitter.com/Giovv_aanni', data-widget-id='697420923536805890', data-chrome='nofooter noborders', width='300', height='600') Tweets de @Giovv_aanni
+        script.
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
         br
-        .row
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-          .col-xs-6.col-md-4
-            a.thumbnail(href='#')
-              img(src='/images/602x339%20(15).jpg', alt='...')
-              
-      a.twitter-timeline(href='https://twitter.com/Giovv_aanni', data-widget-id='697420923536805890', data-chrome='nofooter noborders', width='300', height='600') Tweets de @Giovv_aanni
-          script.
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-          br
-          br
-          br
-          br
-          br
-          br
-          a.twitter-follow-button(href='https://twitter.com/Job4Student', data-show-count='false', data-size='large', data-chrome='nofooter noborders', width='300', height='600') Follow @Job4Student
-          script.
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          br
-          
-      if err
-        if err.errEmail || err.errPassword
-          script(src='/javascripts/index.js')
-        else if err.errLogin
-          script(src='/javascripts/index2.js')
+        br
+        br
+        br
+        br
+        br
+        a.twitter-follow-button(href='https://twitter.com/Job4Student', data-show-count='false', data-size='large', data-chrome='nofooter noborders', width='300', height='600') Follow @Job4Student
+        script.
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+        br
+        br
