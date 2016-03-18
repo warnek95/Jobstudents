@@ -1,4 +1,61 @@
 extends layout
 block content
-    h1 Head Hunter
-    p Welcome to #{title}
+    // Intro Section
+    #intro.intro-section
+      .container
+        #about.container.about-section
+          .row
+            br
+            br
+            br
+            br
+            p.fontalltext Vous êtes recruteur ?
+            .col-lg-offset-4.col-lg-6
+              img.img-responsive.imgtaille(src='/images/r.jpg', alt='', width='60%')
+            .col-lg-12
+              font(color='black')
+                br
+                b
+                  h1.fontalltext
+                    | Deposez vos offres ici et trouvez le candidat idéal!!
+      .container
+        .row
+          form(method='post' name='search' autocomplete='Off' action='/search')
+            .col-md-8
+              input.form-control(type='text', placeholder='Votre Recherche ...',name="query")
+            .col-md-2
+              select.form-control(name='type')
+                option(value='users') Candidats
+                option(value='offers') Offres
+            .col-md-2
+              span.input-group-btn
+                button.btn.btn-primary(type='submit') Rechercher!
+        br
+        #services.row
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')
+          .col-xs-6.col-md-4.img-responsive
+            a.thumbnail(href='#')
+              img(src='/images/offreetserviceimg.jpg', alt='...')

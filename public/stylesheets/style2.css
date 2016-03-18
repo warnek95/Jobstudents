@@ -84,7 +84,7 @@ p.fonttextej4s {
     color: black;
 }
 .footer-distributed .footer-company-about span {
-    color: black;    
+    color: black;
 }
 
 body {
@@ -95,7 +95,7 @@ body {
 
 .imgtaille {
     padding-top: 0px;
-    margin: auto;  
+    margin: auto;
     width="60%"
 }
 
@@ -136,15 +136,15 @@ body {
 }
 
 .navbar-inverse .navbar-nav>li>a {
-    color: black; 
+    color: black;
 }
 
 .navbar-inverse .navbar-nav>li>a:focus {
-    color: gray; 
+    color: gray;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
-    color: gray; 
+    color: gray;
 }
 
 video {

@@ -14,7 +14,7 @@ router.get('/new',csrfProtection,Policies.isRecruiter,OfferController.resNew, fu
 router.post('/new', parseForm, csrfProtection,OfferController.new, function(req, res, next) {
 
 });
-router.get('/search/:q', OfferController.find, function(req, res, next) {
+router.get('/show/:q', OfferController.find, function(req, res, next) {
 
 });
 module.exports = router;
