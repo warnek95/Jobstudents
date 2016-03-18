@@ -1,0 +1,32 @@
+extends layout
+block content
+    script(src='/javascripts/socket.io.js')
+    script(type='text/javascript', src='/javascripts/easyrtc.js')
+    script(type='text/javascript', src='/javascripts/demo_audio_video_simple.js')
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    script(type='text/javascript').
+      onload="connect()";
+    #demoContainer
+      #connectControls
+        #otherClients
+      #videos
+        video#selfVideo.easyrtcMirror(autoplay='autoplay', muted='muted', volume='0')
+        div(style='position:relative;float:left;')
+          video#callerVideo(autoplay='autoplay')
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br

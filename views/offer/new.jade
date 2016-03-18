@@ -1,23 +1,40 @@
 extends ../layout
 block content
-    h1 New Offer form
-    form(method='post' name='offer' autocomplete='Off')
-        input(type='text' placeholder='Experience exigee' name='degree')
+    br
+    br
+    br
+    br
+    h1 Ajouter une offre
+    .container  
+      form(method='post' name='offer' autocomplete='Off' action='/offer/new')
+        .input-group
+          span.input-group-addon Intitulé
+          input.form-control(type='text' placeholder="Titre de l'offre" name='title')
         br
-        input(type='text' placeholder="Titre de l'offre" name='title')
+        .input-group
+          span.input-group-addon Niveau
+          select.form-control(name='degree')
+            option(value='Bac+5') Bac+5
+            option(value='Bac+5') Bac+4
+            option(value='Bac+3') Bac+3
+            option(value='CAP') CAP
         br
-        input(type='text', placeholder='Duree', name='duration')
+        .input-group
+          span.input-group-addon Durée
+          input#email.form-control(type='text', name='duration', placeholder='La durée du contrat')
         br
-        input(type='text', placeholder="Nom de l'entreprise", name='company')
+        .input-group
+          span.input-group-addon Type de contrat
+          select.form-control(name='contract')
+            option(value='CDI') CDI
+            option(value='CDD') CDD
+            option(value='Alternance') Alternance
+            option(value='Stage') Stage
         br
-        select(name='contract', size='1')
-          option(selected='', value='CDI') CDI
-          option(selected='', value='CDD') CDD
-          option(selected='', value='Alternance') Alternance
-          option(selected='', value='Stage') Stage
+        .input-group
+          span.input-group-addon Description
+          textarea.form-control(rows='30', cols='100' name='body')
         br
-        textarea(rows='30', cols='100' name='body')
         br
         input(type='hidden', name='_csrf', value=csrfToken)
-        input(type='submit' text='Envoyer')
-=csrfToken
+        button.btn.btn-primary(type='submit') Ajouter

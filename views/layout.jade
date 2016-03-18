@@ -13,6 +13,7 @@ head
   link(href='/stylesheets/bootstrap/css/footer-distributed-with-address-and-phones.css', rel='stylesheet')
   link(href='/stylesheets/scrolling-nav.css', rel='stylesheet')
   link(href='/stylesheets/styleaccueil.css', rel='stylesheet')
+  link(href='/stylesheets/styleprofilcandidat.css', rel='stylesheet')
   link(href='/stylesheets/animate.css', rel='stylesheet')
   // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
   // WARNING: Respond.js doesn't work if you view the page via file://
@@ -28,7 +29,7 @@ head
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand.page-scroll(href='#page-top') Job4student
+          a.navbar-brand.page-scroll(href='/') Job4student
         .collapse.navbar-collapse.navbar-ex1-collapse
           ul.nav.navbar-nav
             // Hidden li included to remove active class from about link when scrolled up past about section
@@ -42,24 +43,26 @@ head
               a.page-scroll(href='#avistweet') Avis
             li
               a.page-scroll(href='#contact') Contact
-          unless session.authenticated
-            ul.nav.navbar-nav.navbar-right
-              li
-                a.page-scroll(href='/page/recuteur.html') Recruteur 
-              li
-                a(type='button', data-toggle='modal', data-target='#myModal', href='#')
-                  span.glyphicon.glyphicon-user
-                  |  Inscription
-              li
-                a(type='button', data-toggle='modal', data-target='#myModal1', href='#')
-                  span.glyphicon.glyphicon-log-in
-                  |  Connexion
-          else
-            ul.nav.navbar-nav.navbar-right
-              //- button.btn.btn-default.btn-lg(type='button')
-              //-   | déconnexion
-              a(href='/signout') déconnexion 
-              a(href='/user/show/#{session.User._id}') #{session.User._id}
+          if  session
+            if  session.authenticated
+              ul.nav.navbar-nav.navbar-right
+                //- button.btn.btn-default.btn-lg(type='button')
+                //-   | déconnexion
+                a(href='/signout') déconnexion 
+                a(href='/user/show/#{session.User._id}') #{session.User._id}
+            else
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a.page-scroll(href='/headhunter') Recruteur 
+                li
+                  a(type='button', data-toggle='modal', data-target='#myModal', href='#')
+                    span.glyphicon.glyphicon-user
+                    |  Inscription
+                li
+                  a(type='button', data-toggle='modal', data-target='#myModal1', href='#')
+                    span.glyphicon.glyphicon-log-in
+                    |  Connexion
+          
               
               
     block content
@@ -98,11 +101,15 @@ head
                 span.input-group-addon Confirmation du mot de passe 
                 input#mdp2.form-control(type='password', name='passwordConfirmation', placeholder='Confirmation')
               br
-              .input-group
-                span.input-group-addon Role
-                select.form-control(name='status')
-                  option(value='applicant') Postulant
-                  option(value='recruiter') Recruteur
+              p.choixRC Vous êtes ?
+              .btn-group(data-toggle='buttons')
+                label.btn.btn-primary
+                  input#option2(type='radio', name='status', autocomplete='off',value='applicant')
+                  |  Candidat
+                label.btn.btn-primary
+                  input#option3(type='radio', name='status', autocomplete='off',value='recruiter')
+                  |  Recruteur
+              br
               br
               input(type='hidden', name='_csrf', value=csrfToken)
               button.btn.btn-primary(type='submit') Inscription
@@ -119,7 +126,7 @@ head
             form(method='post' name='signin' autocomplete='Off' action='/signin')
               .input-group
                 span.input-group-addon Email
-                input#pseudo.form-control(type='text', name='email', placeholder='Votre email')
+                input#pseudo.form-control(type='text', name='email', placeholder='Votre email',value=email)
               br
               .input-group
                 span.input-group-addon Mot de passe 
@@ -127,7 +134,7 @@ head
               br
               input(type='hidden', name='_csrf', value=csrfToken)
               button.btn.btn-primary(type='submit') Connexion
-              
+
               
     // jQuery
     script(src='/javascripts/jquery-1.12.1.js')
@@ -136,6 +143,11 @@ head
     // Scrolling Nav JavaScript
     script(src='/javascripts/jquery.easing.min.js')
     script(src='/javascripts/scrolling-nav.js')
+    
+    if errSignup
+      script(src='/javascripts/index.js')
+    if errLogin
+      script(src='/javascripts/index2.js')
     
     footer#contact.footer-distributed
           .footer-left
@@ -164,26 +176,26 @@ head
             .row
               .col-md-offset-2.col-md-1
                 a(href='https://www.facebook.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/facebook.png', alt='Facebook')
+                  img.taille.img-responsive(src='/images/social/facebook.png', alt='Facebook')
               .col-md-1
                 a(href='https://www.twitter.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/twitter.png', alt='twitter')
+                  img.taille.img-responsive(src='/images/social/twitter.png', alt='twitter')
               .col-md-1
                 a(href='https://fr.linkedin.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/linkedin1.png', alt='linkedin')
+                  img.taille.img-responsive(src='/images/social/linkedin1.png', alt='linkedin')
               .col-md-1
                 a(href='https://www.viado.com', target='_blank')
-                  img.taille.img-responsive(src='images/social/Viadeo.png', alt='viodea')
+                  img.taille.img-responsive(src='/images/social/Viadeo.png', alt='viodea')
               .col-md-1
                 a(href='https://www.googleplus.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/google-plus.png', alt='Google plus')
+                  img.taille.img-responsive(src='/images/social/google-plus.png', alt='Google plus')
               .col-md-1
                 a(href='https://www.youtube.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/Youtube.png', alt='youtube')
+                  img.taille.img-responsive(src='/images/social/Youtube.png', alt='youtube')
               .col-md-1
                 a(href='https://www.instagram.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/skype.png', alt='instagram')
+                  img.taille.img-responsive(src='/images/social/skype.png', alt='instagram')
               .col-md-1
                 a(href='https://www.pinterest.com/', target='_blank')
-                  img.taille.img-responsive(src='images/social/Pinterest.png', alt='pinterest')
+                  img.taille.img-responsive(src='/images/social/Pinterest.png', alt='pinterest')
             p.tdr.fontalltext © 2016 Tous droits réservés

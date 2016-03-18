@@ -4,22 +4,25 @@ block content
     // Intro Section
     #intro.intro-section
       div
-        p.textimgacc
+        p.textimgacc.white
           | BIENVENUE AU BUREAU
-        p.textimgacc1
+        p.textimgacc1.white
           | Trouvez le stage ou le job de vos rêves
-        img.imageaccl.img-responsive(src='/images/imageaccueil.jpg')
+        img.imageaccl.img-responsive(src='/images/job4students.jpg')
       br
       p.fonttextej4s.animated.pulse Job4Student
       .container
         .row
-          .col-md-12
-            .input-group
-              input.form-control(type='text', placeholder='Votre Recherche ...')
+          form(method='post' name='search' autocomplete='Off' action='/search')
+            .col-md-8
+              input.form-control(type='text', placeholder='Votre Recherche ...',name="query")
+            .col-md-2
+              select.form-control(name='type')
+               option(value='offers') Offre
+               option(value='users') Candidats
+            .col-md-2
               span.input-group-btn
-                button.btn.btn-default(type='button') Rechercher!
-            // /input-group
-          // /.col-md-12
+                button.btn.btn-primary(type='submit') Rechercher!
         br
         #services.row
           .col-xs-6.col-md-4.imgserv
@@ -64,64 +67,7 @@ block content
         br
         br
         br
-      // Modal
-      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header.modal-header-primary
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') ×
-              h4#myModalLabel.modal-title Inscription
-            .modal-body
-              .input-group
-                span.input-group-addon Pseudo
-                input#pseudo.form-control(type='text', name='pseudo', placeholder='Votre pseudo')
-              br
-              .input-group
-                span.input-group-addon Email
-                input#email.form-control(type='email', name='email', placeholder='Votre email')
-              br
-              .input-group
-                span.input-group-addon Confirmation du mail
-                input#email2.form-control(type='email', name='email2', placeholder='Votre confirmation')
-              br
-              .input-group
-                span.input-group-addon Mot de passe
-                input#mdp.form-control(type='text', name='motdepasse', placeholder='Votre mot de passe')
-              br
-              .input-group
-                span.input-group-addon Confirmation du mot de passe 
-                input#mdp2.form-control(type='text', name='motdepasse2', placeholder='Confirmation')
-              br
-              p.choixRC Vous êtes ?
-              .btn-group(data-toggle='buttons')
-                label.btn.btn-primary
-                  input#option2(type='radio', name='options', autocomplete='off')
-                  |  Candidat
-                label.btn.btn-primary
-                  input#option3(type='radio', name='options', autocomplete='off')
-                  |  Recruteur
-              br
-              br
-              button.btn.btn-primary(type='button', data-dismiss='modal') Inscription
-      // Modal
-      #myModal1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header.modal-header-primary
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') ×
-              h4#myModalLabel.modal-title Connexion
-            .modal-body
-              .input-group
-                span.input-group-addon Pseudo
-                input#pseudo.form-control(type='text', name='identifiant', placeholder='Votre pseudo')
-              br
-              .input-group
-                span.input-group-addon Mot de passe 
-                input#mdp.form-control(type='password', name='motdepasse', placeholder='Votre mot de passe')
-              br
-              button.btn.btn-primary(type='button', data-dismiss='modal') Connexion
+  
       #avistweet
         a.twitter-timeline(href='https://twitter.com/Giovv_aanni', data-widget-id='697420923536805890', data-chrome='nofooter noborders', width='300', height='600') Tweets de @Giovv_aanni
         script.

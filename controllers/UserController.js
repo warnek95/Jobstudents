@@ -2,39 +2,54 @@ var User = require('../models/User.js');
 
 module.exports = {
   signup : function(req,res,next){
-    req.session.err = undefined;
+    req.session.errSignup = undefined;
     req.session.formUser = undefined;
-    // console.log(req.session)
-    verification(req.body,function (err) {
-      if (err.errEmail || err.errPassword) {
-        req.session.err = err;
+    User.findOne({ email: req.body.email }, function (err, user){
+      if (!user) {
+        verification(req.body,function (err) {
+          if (err.errEmail || err.errPassword) {
+            req.session.errSignup = err;
+            req.session.formUser = {
+              firstName : req.body.firstName,
+              lastName : req.body.lastName
+            };
+            res.redirect('/');
+          } else {
+            encrypt(req.body.password, function (password) {
+              req.body.password = password;
+              create(req.body,function (err,user) {
+                if (err) {
+                  req.session.formUser = {
+                    firstName : req.body.firstName,
+                    lastName : req.body.lastName
+                  };
+                  req.session.errSignup = {
+                    errEmail : err.toString()
+                  };
+                  res.redirect('/');
+                }
+                else {
+                  req.session.User = user;
+                  req.session.authenticated = true;
+                  res.locals.session = req.session;
+                  res.locals.csrfToken = req.csrfToken();
+                  res.redirect('/user/show/'+user.id);
+                }
+              })
+            })
+          }
+        })
+      }else {
         req.session.formUser = {
           firstName : req.body.firstName,
           lastName : req.body.lastName
         };
+        req.session.errSignup = {
+          errEmail : "Email already in use"
+        };
         res.redirect('/');
-      } else {
-        encrypt(req.body.password, function (password) {
-          req.body.password = password;
-          create(req.body,function (err,user) {
-            if (err) {
-              console.log(err.toString());
-              req.session.err = {
-                errEmail : err.toString()
-              };
-              res.redirect('/');
-            }
-            else {
-              req.session.User = user;
-              req.session.authenticated = true;
-              res.locals.session = req.session;
-              res.locals.csrfToken = req.csrfToken();
-              res.redirect('/user/show/'+user.id);
-            }
-          })
-        })
       }
-    })
+    });
   },
   resSignup : function(req,res,next) {
     res.locals.csrfToken = req.csrfToken();
@@ -58,6 +73,48 @@ module.exports = {
         res.render('user/show');
       }
     })
+  },
+  edit : function (req,res,next) {
+    var fs = require("fs");
+    if (req.files) {
+      var cvPath = req.files.cv ? '/images/'+req.files.cv[0].filename+'.'+req.files.cv[0].originalname.split(/[\s.]+/)[req.files.cv[0].originalname.split(/[\s.]+/).length-1] : ""
+      var motivationLetterPath = req.files.motivationLetter ? '/images/'+req.files.motivationLetter[0].filename+'.'+req.files.motivationLetter[0].originalname.split(/[\s.]+/)[req.files.motivationLetter[0].originalname.split(/[\s.]+/).length-1] : ""
+      if(req.files.cv) {
+        req.files.cv[0].path = req.files.cv[0].path+'.'+req.files.cv[0].originalname.split(/[\s.]+/)[req.files.cv[0].originalname.split(/[\s.]+/).length-1]
+        fs.writeFile("",req.files.cv, function(err) {})
+      }
+      if(req.files.motivationLetter){
+        req.files.motivationLetter[0].path = req.files.motivationLetter[0].path+'.'+req.files.motivationLetter[0].originalname.split(/[\s.]+/)[req.files.motivationLetter[0].originalname.split(/[\s.]+/).length-1]
+        fs.writeFile(req.files.motivationLetter, function(err) {})
+      }
+    }
+    if (req.session.User.status == 'recruiter') {
+      var update = {
+        firstName : req.body.firstName,
+        lastName  : req.body.lastName,
+        email     : req.body.email,
+        phone     : req.body.phone,
+        company   : req.body.company,
+        position  : req.body.position
+      }
+    } else {
+      var update = {
+        firstName : req.body.firstName,
+        lastName  : req.body.lastName,
+        birthday  : req.body.birthday,
+        email     : req.body.email,
+        sectorsInterested    : {label : req.body.sectorsInterested},
+        diplomes   : {title : req.body.diplomes},
+        cv        : cvPath,
+        motivationletter : motivationLetterPath,
+        interview : req.body.interview,
+        links     : {value : req.body.links},
+        phone     : req.body.phone
+      }
+    }
+    User.update({_id : req.session.User._id}, update, function () {
+      res.redirect('/user/show/'+req.session.User._id)
+    })
   }
 };
 
@@ -75,7 +132,7 @@ function encrypt(password,next) {
     // An unexpected error occurred.
 
     error: function (err){
-      console.console.log(err);
+      console.log(err);
       res.redirect('/');
     },
 
@@ -104,7 +161,6 @@ function create(user,next){
 
 function findByEmail(email,res,next){
   User.where({ email: email }).findOne(function (err, user) {
-    console.log(user)
     if (err) return console.log(err);
     if (user) {
       next(user);

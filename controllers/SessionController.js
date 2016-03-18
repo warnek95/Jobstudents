@@ -18,8 +18,11 @@ module.exports = {
           },
           // Password attempt does not match already-encrypted version
           incorrect: function (){
-            req.session.err = {
-              errLogin : "Incorrect"
+            req.session.formUser = {
+              email : req.body.email
+            } 
+            req.session.errLogin = {
+              err : "Incorrect"
             };
             console.log("Incorrect");
             res.redirect('/');
@@ -33,8 +36,11 @@ module.exports = {
           }
         });
       }else{
-        req.session.err = {
-          errLogin : "Incorrect"
+        req.session.formUser = {
+          email : req.body.email
+        }
+        req.session.errLogin = {
+          err : "Incorrect"
         };
         console.log("Incorrect");
         res.redirect('/');

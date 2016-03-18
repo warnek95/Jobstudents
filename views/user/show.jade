@@ -6,14 +6,121 @@ block content
     br
     br
     br
-    h1 Search
+    h1 Profil
     p Hi #{user.firstName} #{user.lastName}
     if session.authenticated
       if session.User.status == 'applicant' && session.User._id == user._id
-        p Hi applicant
+        br
+        br
+        br
+        br
+        br
+        br
+        div
+          form(method='post',name='edit',autocomplete='Off',action='/user/edit',enctype='multipart/form-data')
+            .container
+              .col-md-6
+                .input-group
+                  span.input-group-addon Nom :
+                  input.form-control(type='text', placeholder='Votre nom',value=user.lastName,name='lastName')
+                br
+                .input-group
+                  span.input-group-addon Prenom :
+                  input.form-control(type='text', placeholder='Votre prenom',value=user.firstName,name='firstName')
+                br
+                .input-group
+                  span.input-group-addon Date de naisssance :
+                  input.form-control(type='date', placeholder='Votre date de naissance',value=user.birthday,name='birthday')
+                br
+                .input-group
+                  span.input-group-addon Email :
+                  input.form-control(type='text', placeholder='Votre email',value=user.email,name='email')
+                br
+                .input-group
+                  span.input-group-addon Diplomes :
+                  if user.diplomes.length > 0
+                    input.form-control(type='text', placeholder='Vos diplomes',value=user.diplomes[0].title,name='diplomes')
+                  else
+                    input.form-control(type='text', placeholder='Vos diplomes',name='diplomes')
+                br
+                .input-group
+                  span.input-group-addon Secteurs :
+                  if user.sectorsInterested.length > 0
+                    input.form-control(type='text', placeholder='Vos secteurs',value=user.sectorsInterested[0].label,name='sectorsInterested')
+                  else
+                    input.form-control(type='text', placeholder='Vos secteurs',name='sectorsInterested')
+                br
+                .input-group
+                  span.input-group-addon CV :
+                  input.form-control(type='file', placeholder='Votre nom', name='cv')
+                if user.cv
+                  a(href=user.cv) Cv
+                br
+                br
+                .input-group
+                  span.input-group-addon Lettre de motivation :
+                  input.form-control(type='file', placeholder='Votre nom', name='motivationLetter')
+                if user.motivationLetter
+                  a(href=user.motivationletter) Lettre de motivation
+                br
+                br
+                br
+                br
+                br
+              .col-md-6
+                .input-group
+                  span.input-group-addon Présentation :
+                  textarea.form-control(name='interview',placeholder='Votre présentation') #{user.interview}
+              br
+              br
+              br
+              br
+              input(type='hidden', name='_csrf', value=csrfToken)
+              .col-md-offset-6.col-md-6
+                .input-group
+                  input.btn.btn-primary(value='Valider', type='submit')
+                  
+          iframe(src='http://docs.google.com/gview?url=http://localhost:3000/user/show/56eb2eb95892f985033fd3c5', style='width:600px; height:500px;', frameborder='0')
+
       else if session.User.status == 'recruiter' && session.User._id == user._id
         p Hi recruiter
         a(href='/offer/new') New offer
-        
+        br
+        br
+        br
+        br
+        br
+        br
+        div
+          form(method='post',name='edit',autocomplete='Off',action='/user/editRecruiter')
+            .container
+              .input-group
+                span.input-group-addon Nom :
+                input.form-control(type='text', placeholder='Votre nom',value=user.lastName,name='lastName')
+              br
+              .input-group
+                span.input-group-addon Prenom :
+                input.form-control(type='text', placeholder='Votre prenom',value=user.firstName,name='firstName')
+              br
+              .input-group
+                span.input-group-addon Email :
+                input.form-control(type='text', placeholder='Votre email',value=user.email,name='email')
+              br
+              .input-group
+                span.input-group-addon Companie :
+                input.form-control(type='text', placeholder='Votre companie',value=user.company,name='company')
+              br
+              .input-group
+                span.input-group-addon Poste :
+                input.form-control(type='text', placeholder='Votre poste',value=user.position,name='position')
+              br
+              br
+              br
+              br
+              br
+              input(type='hidden', name='_csrf', value=csrfToken)
+              .col-md-offset-5.col-md-6
+                .input-group
+                  input.btn.btn-primary(value='Valider', type='submit')
 
       

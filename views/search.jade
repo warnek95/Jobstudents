@@ -5,5 +5,30 @@ block content
     br
     br
     br
-    h1 Search
-    p=offer.body
+    .row
+      .col-md-12
+        hr
+        p.text-center Résultat de la recherche -> 
+        hr
+    .container
+      .row
+        each offer in offers
+          .col-sm-6.col-md-4
+            .thumbnail
+              a(href="/offer/show/"+offer.id)
+                h2.text-center #{offer.title}
+              .caption
+                h3
+                p
+                h5 Entreprise : #{offer.company}
+                br
+                h5 Créé le : #{offer.created}
+                a.btn.btn-primary(href='#', role='button') Button
+    if offers
+      h1 Search offer
+      each offer in offers
+        p=offer.body
+    else if users
+      h1 Search user
+      each user in users
+        p=user.firstName
