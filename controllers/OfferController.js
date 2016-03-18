@@ -12,17 +12,18 @@ module.exports = {
     res.render('offer/new');
   },
   find : function(req,res,next) {
-    Offer.findOne({id:req.params.id},function(err, offer){
+    Offer.findOne({title:new RegExp(req.params.q,'i')},function(err, offer){
       console.log(offer);
       if(err) return console.log(err);
       if(offer){
+        next(offer);
         res.locals.session = req.session;
         res.locals.offer = offer;
-        res.render('offer/show')
+        res.render('search')
       }else {
         res.locals.session = req.session;
         res.locals.offer = offer;
-        res.render('offer/show')
+        res.render('search')
       }
     });
     console.log(req.params.q);

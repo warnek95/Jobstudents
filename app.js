@@ -10,6 +10,7 @@ var db = require('./conf/connection.js');
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var headhunter = require('./routes/headhunter');
+var search = require('./routes/search');
 var offer = require('./routes/offer');
 var test = require('./routes/test');
 
@@ -39,6 +40,7 @@ app.use(session({
 app.use('/', routes);
 app.use('/user', user);
 app.use('/headhunter', headhunter);
+app.use('/search', search);
 app.use('/offer', offer);
 app.use('/test', test);
 

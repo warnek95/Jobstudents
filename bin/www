@@ -9,7 +9,6 @@ var debug = require('debug')('jobstudents:server');
 var http = require('http');
 var io      = require("socket.io");
 var easyrtc = require("easyrtc");
-require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 /**
  * Get port from environment and store in Express.
